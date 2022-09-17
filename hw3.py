@@ -1,6 +1,7 @@
 #Создайте программу для игры в ""Крестики-нолики"".
 import random as r
 
+# рисуем поле
 board = list(range (1, 10))
 def play_form ():
     print('-------------')
@@ -9,7 +10,7 @@ def play_form ():
         print('-------------')
 play_form ()
 
-
+# определение конца игры
 def vin_table(chec_vin, pl, step):
     if step == 8:
         print ("Победителей нет")
@@ -20,9 +21,7 @@ def vin_table(chec_vin, pl, step):
                 return True
 
 
-
-
-
+# Запоминание действий игроков
 def enter_simbol (simbol, pl, memory_vin):
     num = int(input(f'Игрок номер {pl} определите номер ячейки в которую ставим {simbol} : '))
     board [num-1] = simbol
