@@ -44,13 +44,17 @@ def swits_bot (num, person):
             else:
                 return swits_bot (num - n, 2)
         if person ==2:
-            if num >= 57:
-                i = r.randint(1, 28)
-                n = num - i*(num//i) +1
+            n = r.randint(1, 29)
+            
+            if num >= 85:
                 print (f'Олег взял {n} конфет\n')
                 return swits_bot (num-n, 1)
             elif num == 29:
                 n = r.randint(1, 29)
+                print (f'Олег взял {n} конфет\n')
+                return swits_bot (num-n, 1)
+            elif 57 <= num  < 85:
+                n = 1
                 print (f'Олег взял {n} конфет\n')
                 return swits_bot (num-n, 1)
 
@@ -69,9 +73,9 @@ choise = r.randint(1,2)
 print(f'{choise} игрок начинает')
 
 if start == '1':
-    print(f' Выиграл игрок № {swits(202, choise)}\n')
+    print(f' Выиграл игрок № {swits(2021, choise)}\n')
 elif start == '2':
-    n = swits_bot(100, choise)
+    n = swits_bot(2021, choise)
     if n == 1:
         print('ПОЗДРАВЛЯЮ!!! Вы выиграли\n')
     else: print('Выиграл Олег\n')
