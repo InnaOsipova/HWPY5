@@ -7,38 +7,71 @@
 
 import random as r
 
+#Человек против человека
 def swits (num, person):
     if num <= 28:
-        print(f'осталось {num} конфет')
+        print(f'\n Последний игрок забирает {num} конфет\n')
         return person
     else:
-        print(f'осталось {num} конфет')
+        print(f'\nСейчас {num} конфет\n')
         if person ==1:
             n = int(input ('Первый игрок возьмите конфеты : '))
             if n > 28:
-                print ('Нужно взять меньше конфет')
+                print ('Нужно взять меньше конфет\n')
                 return swits (num, person)
             else:
-                num -= n
-                person = 2
-                return swits (num, person)
+                return swits (num - n, 2)
         if person ==2:
             n = int(input ('Второй игрок возьмите конфеты : '))
             if n > 28:
-                print ('Нужно взять меньше конфет')
+                print ('Нужно взять меньше конфет\n')
                 return swits (num, person)
             else:
-                num -= n
-                person = 1
-                return swits (num, person)
+                return swits (num-n, 1)
 
+#Бот против человека
+def swits_bot (num, person):
+    if num <= 28:
+        print(f'\n Последний игрок забирает {num} конфет\n')
+        return person
+    else:
+        print(f'\n Сейчас {num} конфет\n')
+        if person ==1:
+            n = int(input ('Ваш шаг возьмите конфеты : '))
+            if n > 28:
+                print ('Нужно взять меньше конфет\n')
+                return swits_bot (num, person)
+            else:
+                return swits_bot (num - n, 2)
+        if person ==2:
+            if num >= 57:
+                i = r.randint(1, 28)
+                n = num - i*(num//i) +1
+                print (f'Олег взял {n} конфет\n')
+                return swits_bot (num-n, 1)
+            elif num == 29:
+                n = r.randint(1, 29)
+                print (f'Олег взял {n} конфет\n')
+                return swits_bot (num-n, 1)
+
+            else: 
+                n = num - 29
+                print(f'Олег взял {n} конфет')
+                return swits_bot (num-n, 1)
 
 print\
-    (   'На столе лежит 2021 конфета. Играют два игрока делая ход друг после друга.'
-        'Первый ход определяется жеребьёвкой. За один ход можно забрать не более чем 28 конфет. Все конфеты' 
-        'достаются сделавшему последний ход'
+    (   'На столе лежит 2021 конфета. Играют два игрока делая ход друг после друга.\n'
+        'Первый ход определяется жеребьёвкой. За один ход можно забрать не более чем 28 конфет.\nВсе конфеты' 
+        'достаются сделавшему последний ход\n'
     )
-start = int(input('Чтобы приступить к игре нажмите 1 : '))
-if start == 1:
-    choise = r.randint(1,3)
-    print(f' Выиграл игрок № {swits(2021, choise)}')
+start = input('Если нажать 1 - будете играть против человека, если 2, против бота : ')
+choise = r.randint(1,2)
+print(f'{choise} игрок начинает')
+
+if start == '1':
+    print(f' Выиграл игрок № {swits(202, choise)}\n')
+elif start == '2':
+    n = swits_bot(100, choise)
+    if n == 1:
+        print('ПОЗДРАВЛЯЮ!!! Вы выиграли\n')
+    else: print('Выиграл Олег\n')
